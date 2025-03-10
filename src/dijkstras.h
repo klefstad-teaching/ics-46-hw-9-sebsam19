@@ -27,6 +27,7 @@ struct Edge {
     bool operator<(const Edge& other) const {
         return weight < other.weight;
     }
+    
 };
 
 struct Graph : public vector<vector<Edge>> {
