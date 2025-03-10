@@ -16,11 +16,12 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         ladder_queue.pop();
         string last_word = ladder.back();
 
-        for (string words : word_list) {
+        for (const string& words : word_list) {
+
             if (is_adjacent(last_word, words)) {
-                if (visited.find(words) != visited.end()) {
+                if (visited.find(words) == visited.end()) {
                     visited.insert(words);
-                    vector<string> new_ladder(ladder);
+                    vector<string> new_ladder = ladder;
                     new_ladder.push_back(words);
                     if (words == end_word) {
                         return new_ladder;
@@ -35,29 +36,8 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 }
 
 bool is_adjacent(const string& word1, const string& word2) {
-    int diff = 0;
-    if (edit_distance_within(word1, word2, 1) == 1) {
-        if (abs(static_cast<int>((word1.size() - word2.size()))) == 1) {
-            string longest = (word1.size() > word2.size()) ? word1 : word2;
-            string shortest = (word1.size() < word2.size()) ? word1 : word2;
-            for (size_t i = 0; i < longest.size(); ++i) {
-                string substring = longest.substr(0, i) + longest.substr(i+1);
-                if (substring == shortest) {
-                    return true;
-                }
-            }
-        }
 
-        if (word1.size() == word2.size()) {
-            for (size_t i = 0; i < word1.size(); ++i) {
-                if (word1[i] != word2[i]) {
-                    diff++;
-                }
-            }
-            return diff == 1;
-        }  
-    } 
-    return false;
+    return edit_distance_within(word1, word2, 1);
 }
 
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d) {
@@ -75,18 +55,37 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     //populating matrix
     for (size_t i = 1; i <= str1.size(); ++i) {
         for (size_t j = 1; j<= str2.size(); ++j) {
-            if (str1[i] == str2[j]) {
+            if (str1[i-1] == str2[j-1]) {
                 cost = 0;
             } else {
                 cost = 1;
             }
 
-            choices[i][j] = min(choices[i-1][j] + 1, min(choices[i][j-1] + 1, choices[i-j][j-1] + cost));
+            choices[i][j] = min(choices[i-1][j] + 1, min(choices[i][j-1] + 1, choices[i-1][j-1] + cost));
         }
     }
     return choices[str1.size()][str2.size()] <= d;
 }
 
-// void load_words(set<string> & word_list, const string& file_name);
-// void print_word_ladder(const vector<string>& ladder);
-// void verify_word_ladder();
+void load_words(set<string> & word_list, const string& file_name) {
+    ifstream in(file_name);
+    string word;
+    while (in >> word) {
+        word_list.insert(word);
+    }
+
+}
+void print_word_ladder(const vector<string>& ladder) {
+    for (size_t i = 0; i < ladder.size(); ++i) {
+        cout << ladder[i] << ' ';
+    }
+    cout << endl;
+}
+
+
+
+void verify_word_ladder() {
+    set<string> word_list;
+    load_words(word_list, "src/words.txt");
+    my_assert(generate_word_ladder("cat", "dog", word_list).size() == 4);
+}
