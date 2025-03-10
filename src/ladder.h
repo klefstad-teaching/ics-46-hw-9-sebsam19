@@ -7,6 +7,9 @@
 #include <string>
 #include <cmath>
 
+//professors assert
+#define my_assert(e) {cout << #e << ((e) ? "passed" : "failed") << endl;}
+
 using namespace std;
 
 void error(string word1, string word2, string msg);
