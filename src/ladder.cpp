@@ -68,7 +68,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
 
 void load_words(set<string> & word_list, const string& file_name) {
     ifstream in(file_name);
-    if (!in.is_open()) {
+    if (!in) {
         return;
     }
     string word;
