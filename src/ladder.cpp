@@ -65,9 +65,10 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     //     }
     // }
     // return choices[str1.size()][str2.size()] <= d;
-    if(abs(static_cast<int>((word1.size()-word2.size()))) == d) {
-        string longest = (word1.size() > word2.size()) ? word1 : word2;
-        string shortest = (word1.size() < word2.size()) ? word1 : word2;
+    if(abs(static_cast<int>((str1.size()-str2.size()))) > d) {return false;}
+    if(abs(static_cast<int>((str1.size()-str2.size()))) == d) {
+        string longest = (str1.size() > str2.size()) ? str1 : str2;
+        string shortest = (str1.size() < str2.size()) ? str1 : str2;
 
         for (size_t i = 0; i < longest.size(); ++i) {
             string sub = longest.substr(0,i) + longest.substr(i+1);
