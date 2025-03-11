@@ -49,7 +49,7 @@ void print_path(const vector<int>& v, int total) {
         return;
     }
     for (int i = 0; i < total; ++i) {
-        cout << v[i] << ' ';
+        cout << v[i] << " ";
     }
-    cout << endl;
+    cout << "hello" << endl;
 }
