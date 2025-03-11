@@ -79,6 +79,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     }
 
     if (str1.size() == str2.size()) {
+        int diff = 0;
         for (size_t i = 0; i < str1.size(); ++i) {
             if (str1[i] != str2[i]) {
                 diff++;
