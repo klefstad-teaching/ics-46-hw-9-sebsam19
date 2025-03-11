@@ -11,6 +11,9 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     std::set<string> visited;
     visited.insert(begin_word);
 
+    if (word_list.end() == word_list.find(end_word)) {
+        return {};
+    }
     if (begin_word == end_word) {
         return {begin_word};
     }
@@ -48,17 +51,6 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     if(abs(static_cast<int>((str1.size()-str2.size()))) > d) {
         return false;
     }
-    if(abs(static_cast<int>((str1.size()-str2.size()))) == d) {
-        string longest = (str1.size() > str2.size()) ? str1 : str2;
-        string shortest = (str1.size() < str2.size()) ? str1 : str2;
-
-        for (size_t i = 0; i < longest.size(); ++i) {
-            string sub = longest.substr(0,i) + longest.substr(i+1);
-            if (sub == shortest) {
-                return true;
-            }
-        }
-    }
 
     if (str1.size() == str2.size()) {
         int diff = 0;
@@ -68,6 +60,15 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
             }
         }
         return diff <= d;
+    }
+    string longest = (str1.size() > str2.size()) ? str1 : str2;
+    string shortest = (str1.size() < str2.size()) ? str1 : str2;
+
+    for (size_t i = 0; i < longest.size(); ++i) {
+        string sub = longest.substr(0,i) + longest.substr(i+1);
+        if (sub == shortest) {
+            return true;
+        }
     }
     return false;
 }
