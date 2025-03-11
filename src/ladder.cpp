@@ -87,6 +87,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
         }
         return diff <= d;
     }
+    return false;
 }
 
 void load_words(set<string> & word_list, const string& file_name) {
