@@ -39,9 +39,9 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
         return holder;
     }
     for (int i = destination; i != -1; i = previous[i]) {
-        holder.insert(holder.begin(), i);
+        holder.push_back(i);
     }
-    return holder;
+    return reverse(holder.begin(), holder.end());
 }
 
 void print_path(const vector<int>& v, int total) {
