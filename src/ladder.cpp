@@ -15,7 +15,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         return {};
     }
     if (begin_word == end_word) {
-        return {begin_word};
+        return {};
     }
 
     while (!ladder_queue.empty()) {
