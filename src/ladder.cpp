@@ -91,8 +91,6 @@ void print_word_ladder(const vector<string>& ladder) {
 
 }
 
-
-
 void verify_word_ladder() {
     set<string> word_list;
     load_words(word_list, "src/words.txt");
