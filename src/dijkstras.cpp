@@ -48,8 +48,9 @@ void print_path(const vector<int>& v, int total) {
     if (v.empty()) {
         return;
     }
-    for (int i = 0; i < total; ++i) {
+    for (int i = 0; i < static_cast<int>(v.size()); ++i) {
         cout << v[i] << " ";
     }
-    cout << "hello" << endl;
+    cout << endl;
+    cout << "Total cost is : " << total << endl;
 }
