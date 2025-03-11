@@ -78,9 +78,9 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
         }
     }
 
-    if (word1.size() == word2.size()) {
-        for (size_t i = 0; i < word1.size(); ++i) {
-            if (word1[i] != word2[i]) {
+    if (str1.size() == str2.size()) {
+        for (size_t i = 0; i < str1.size(); ++i) {
+            if (str1[i] != str2[i]) {
                 diff++;
             }
         }
